@@ -8,9 +8,10 @@ using Dav_Connector.Model;
 namespace Dav_Connector.Migrations
 {
     [DbContext(typeof(DavConnectorDbContext))]
-    partial class DavConnectorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250823152553_Password2")]
+    partial class Password2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.6");

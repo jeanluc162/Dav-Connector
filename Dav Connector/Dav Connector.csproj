@@ -130,11 +130,20 @@
     <Compile Include="Migrations\20250822200120_Initial.designer.cs">
       <DependentUpon>20250822200120_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20250823143301_Password.cs" />
+    <Compile Include="Migrations\20250823143301_Password.designer.cs">
+      <DependentUpon>20250823143301_Password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20250823152553_Password2.cs" />
+    <Compile Include="Migrations\20250823152553_Password2.designer.cs">
+      <DependentUpon>20250823152553_Password2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DavConnectorDbContextModelSnapshot.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\DavConnectorDbContext.cs" />
     <Compile Include="Model\EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringCipher.cs" />
     <Compile Include="ViewModel\EditCredentialPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

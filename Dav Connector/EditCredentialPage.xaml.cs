@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dav_Connector.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,6 +29,14 @@ namespace Dav_Connector
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e.Parameter is Guid)
+            {
+                ((EditCredentialPageViewModel)DataContext).Load((Guid)e.Parameter);
+            }
+            else
+            {
+                ((EditCredentialPageViewModel)DataContext).Load(null);
+            }
             base.OnNavigatedTo(e);
         }
     }

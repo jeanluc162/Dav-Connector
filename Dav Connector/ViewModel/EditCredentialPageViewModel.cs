@@ -1,4 +1,5 @@
-﻿using Dav_Connector.Model;
+﻿using AsyncAwaitBestPractices.MVVM;
+using Dav_Connector.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using Windows.Security.Credentials;
 
 namespace Dav_Connector.ViewModel
 {
-    class EditCredentialPageViewModel:BindableBase
+    class EditCredentialPageViewModel : BindableBase
     {
         private Guid? _id;
 
@@ -36,7 +37,7 @@ namespace Dav_Connector.ViewModel
         {
             Account account = null;
 
-            if(id != null)
+            if (id != null)
                 using (var dbContext = new DavConnectorDbContext())
                 {
                     account = dbContext.Accounts.AsNoTracking().SingleOrDefault(acc => acc.Id == id);
@@ -45,43 +46,35 @@ namespace Dav_Connector.ViewModel
             _id = id;
             Name = account?.Name ?? "";
             UserName = account?.UserName ?? "";
-
-            var vault = new Windows.Security.Credentials.PasswordVault();
-            if(account != null)
-                try
-                {
-                    Password = vault.Retrieve(_id.ToString(), UserName).Password;
-                }
-                catch
-                {
-                    Password = "";
-                }
+            Password = account?.Password ?? "";
         }
-        public void Save()
+        public async Task SaveAsync()
         {
             using (var dbContext = new DavConnectorDbContext())
             {
-                using (var transaction = dbContext.Database.BeginTransaction())
-                {
-                    Account account = null;
-                    if (_id != null)
-                        account = dbContext.Accounts.SingleOrDefault(acc => acc.Id == _id);
-                    else
-                        _id = Guid.NewGuid();
+                Account account = null;
+                if (_id != null)
+                    account = await dbContext.Accounts.SingleOrDefaultAsync(acc => acc.Id == _id);
+                else
+                    _id = Guid.NewGuid();
 
-                    if (account == null)
-                        account = dbContext.Accounts.Add(new Account
-                        {
-                            Id = _id.Value
-                        }).Entity;
+                if (account == null)
+                    account = dbContext.Accounts.Add(new Account
+                    {
+                        Id = _id.Value
+                    }).Entity;
 
-                    account.Name = Name;
-                    account.UserName = UserName;
+                account.Name = Name;
+                account.UserName = UserName;
+                account.Password = Password;
 
-                    dbContext.SaveChanges();
-                }
-                    
+                await dbContext.SaveChangesAsync();
             }
         }
+        public EditCredentialPageViewModel()
+        {
+            SaveCommand = new AsyncCommand(SaveAsync);
+        }
+        public IAsyncCommand SaveCommand { get; }
     }
 }
