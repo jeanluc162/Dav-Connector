@@ -116,8 +116,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EditCredentialPage.xaml.cs">
-      <DependentUpon>EditCredentialPage.xaml</DependentUpon>
+    <Compile Include="EditAccountPage.xaml.cs">
+      <DependentUpon>EditAccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -126,25 +126,20 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20250822200120_Initial.cs" />
-    <Compile Include="Migrations\20250822200120_Initial.designer.cs">
-      <DependentUpon>20250822200120_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20250823143301_Password.cs" />
-    <Compile Include="Migrations\20250823143301_Password.designer.cs">
-      <DependentUpon>20250823143301_Password.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20250823152553_Password2.cs" />
-    <Compile Include="Migrations\20250823152553_Password2.designer.cs">
-      <DependentUpon>20250823152553_Password2.cs</DependentUpon>
+    <Compile Include="Migrations\20250823181808_Initial.cs" />
+    <Compile Include="Migrations\20250823181808_Initial.designer.cs">
+      <DependentUpon>20250823181808_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DavConnectorDbContextModelSnapshot.cs" />
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\AccountType.cs" />
     <Compile Include="Model\DavConnectorDbContext.cs" />
     <Compile Include="Model\EntityBase.cs" />
+    <Compile Include="Model\SyncType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringCipher.cs" />
-    <Compile Include="ViewModel\EditCredentialPageViewModel.cs" />
+    <Compile Include="ViewModel\EditAccountPageViewModel.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -191,7 +186,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EditCredentialPage.xaml">
+    <Page Include="EditAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +195,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

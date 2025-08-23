@@ -31,11 +31,11 @@ namespace Dav_Connector
         {
             if (e.Parameter is Guid)
             {
-                ((EditCredentialPageViewModel)DataContext).Load((Guid)e.Parameter);
+                ((EditAccountPageViewModel)DataContext).Load((Guid)e.Parameter);
             }
             else
             {
-                ((EditCredentialPageViewModel)DataContext).Load(null);
+                ((EditAccountPageViewModel)DataContext).Load(null);
             }
             base.OnNavigatedTo(e);
         }

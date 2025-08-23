@@ -9,15 +9,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
-        <VM:EditCredentialPageViewModel />
+        <VM:EditAccountPageViewModel />
     </Page.DataContext>
     <StackPanel Orientation="Vertical" Padding="5">
         <TextBlock>Name</TextBlock>
-        <TextBox Text="{Binding Name, Mode=TwoWay}"></TextBox>
+        <TextBox Text="{Binding Account.Name, Mode=TwoWay}"></TextBox>
+        <TextBlock>Url</TextBlock>
+        <TextBox Text="{Binding Account.Url, Mode=TwoWay}"></TextBox>
         <TextBlock>Username</TextBlock>
-        <TextBox Text="{Binding UserName, Mode=TwoWay}"></TextBox>
+        <TextBox Text="{Binding Account.UserName, Mode=TwoWay}"></TextBox>
         <TextBlock>Password</TextBlock>
-        <PasswordBox Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
+        <PasswordBox Password="{Binding Account.Password, Mode=TwoWay}"></PasswordBox>
+        <TextBlock>Account Type</TextBlock>
+        <ComboBox SelectedItem="{Binding Account.AccountType, Mode=TwoWay}" ItemsSource="{Binding AccountTypes}" DisplayMemberPath="Name" SelectedIndex="0"></ComboBox>
+        <TextBlock>Sync Type</TextBlock>
+        <ComboBox SelectedItem="{Binding Account.SyncType, Mode=TwoWay}" ItemsSource="{Binding SyncTypes}" DisplayMemberPath="Name" SelectedIndex="2"></ComboBox>
         <Button HorizontalAlignment="Stretch" Name="SaveButton" Command="{Binding SaveCommand}">Save</Button>
     </StackPanel>
 </Page>

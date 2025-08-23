@@ -32,12 +32,19 @@ namespace Dav_Connector.Model
         }
         protected const String DbName = "DavConnectorDb.sqlite";
         protected static readonly String DbConnectionString;
+
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<SyncType> SyncTypes { get; set; }
+        public DbSet<AccountType> AccountTypes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlite(DbConnectionString);
         }
-
-        public DbSet<Account> Accounts { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
