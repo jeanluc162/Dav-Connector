@@ -70,6 +70,9 @@ namespace DavConnector.Library.Migrations
                 name: "IX_Accounts_SyncTypeId",
                 table: "Accounts",
                 column: "SyncTypeId");
+
+            migrationBuilder.Sql($"INSERT INTO SyncTypes (Id, Name) VALUES (X'{BitConverter.ToString(Guid.Parse("24dd7f72-335a-48ec-8ce7-7204bb3359b4").ToByteArray()).Replace("-", "")}','Remote to Local'), (X'{BitConverter.ToString(Guid.Parse("5023eecd-324a-4112-899b-1ec3f4bf7c53").ToByteArray()).Replace("-", "")}','Local to Remote'), (X'{BitConverter.ToString(Guid.Parse("2b52f274-5f3b-4c8d-82e0-20ef84f492fb").ToByteArray()).Replace("-", "")}','Both Ways')");
+            migrationBuilder.Sql($"INSERT INTO AccountTypes (Id, Name) VALUES (X'{BitConverter.ToString(Guid.Parse("31585b9b-7549-4d77-828f-670d617c5fdd").ToByteArray()).Replace("-", "")}','CardDav')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
