@@ -26,10 +26,10 @@ namespace Dav_Connector.Library.Model
         [NotMapped]
         public String Password
         {
-            get => StringCipher.Decrypt(EncryptedPassword, DavConnectorDbContext.GetEncryptionPassword?.Invoke() ?? "");
+            get => StringCipher.Decrypt(EncryptedPassword, DavConnectorDbContext.GetEncryptionPassword?.Invoke() ?? "TEST");
             set
             {
-                EncryptedPassword = StringCipher.Encrypt(value, DavConnectorDbContext.GetEncryptionPassword?.Invoke() ?? "");
+                EncryptedPassword = StringCipher.Encrypt(value, DavConnectorDbContext.GetEncryptionPassword?.Invoke() ?? "TEST");
                 OnPropertyChanged();
             }
         }
