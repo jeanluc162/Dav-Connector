@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dav_Connector.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,9 +28,25 @@ namespace Dav_Connector
             this.InitializeComponent();
         }
 
-        private void AddCredentialButton_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Frame.Navigate(typeof(AddCredentialPage));
+            base.OnNavigatedTo(e);
+            (DataContext as MainPageViewModel).AccountEditRequested += MainPage_AccountEditRequested;
         }
+
+        private void MainPage_AccountEditRequested(object sender, Guid? e = null)
+        {
+            if(e == null)
+                Frame.Navigate(typeof(EditAccountPage));
+            else
+                Frame.Navigate(typeof(EditAccountPage), e.Value);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            (DataContext as MainPageViewModel).AccountEditRequested -= MainPage_AccountEditRequested;
+            base.OnNavigatedFrom(e);
+        }
+
     }
 }

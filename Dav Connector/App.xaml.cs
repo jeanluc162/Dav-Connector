@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dav_Connector.Library.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,7 +35,12 @@ namespace Dav_Connector
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            using (var dbContext = new Model.DavConnectorDbContext())
+            const String DbName = "DavConnectorDb.sqlite";
+            ApplicationData.Current.LocalFolder.CreateFileAsync(DbName, CreationCollisionOption.OpenIfExists).AsTask().GetAwaiter().GetResult();
+            DavConnectorDbContext.DbPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, DbName);
+            DavConnectorDbContext.GetEncryptionPassword = EncryptionPasswordHelper.GetEncryptionPassword;
+
+            using (var dbContext = new DavConnectorDbContext())
             {
                 dbContext.Database.Migrate();
             }

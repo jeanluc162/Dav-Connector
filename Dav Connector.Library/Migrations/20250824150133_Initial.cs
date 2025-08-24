@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Dav_Connector.Migrations
+namespace DavConnector.Library.Migrations
 {
     public partial class Initial : Migration
     {
@@ -37,10 +37,10 @@ namespace Dav_Connector.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    AccountTypeId = table.Column<Guid>(nullable: true),
+                    AccountTypeId = table.Column<Guid>(nullable: false),
                     EncryptedPassword = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    SyncTypeId = table.Column<Guid>(nullable: true),
+                    SyncTypeId = table.Column<Guid>(nullable: false),
                     Url = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true)
                 },
@@ -52,13 +52,13 @@ namespace Dav_Connector.Migrations
                         column: x => x.AccountTypeId,
                         principalTable: "AccountTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Accounts_SyncTypes_SyncTypeId",
                         column: x => x.SyncTypeId,
                         principalTable: "SyncTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -70,9 +70,6 @@ namespace Dav_Connector.Migrations
                 name: "IX_Accounts_SyncTypeId",
                 table: "Accounts",
                 column: "SyncTypeId");
-
-            migrationBuilder.Sql($"INSERT INTO SyncTypes (Id, Name) VALUES (X'{BitConverter.ToString(Guid.Parse("24dd7f72-335a-48ec-8ce7-7204bb3359b4").ToByteArray()).Replace("-", "")}','Remote to Local'), (X'{BitConverter.ToString(Guid.Parse("5023eecd-324a-4112-899b-1ec3f4bf7c53").ToByteArray()).Replace("-", "")}','Local to Remote'), (X'{BitConverter.ToString(Guid.Parse("2b52f274-5f3b-4c8d-82e0-20ef84f492fb").ToByteArray()).Replace("-", "")}','Both Ways')");
-            migrationBuilder.Sql($"INSERT INTO AccountTypes (Id, Name) VALUES (X'{BitConverter.ToString(Guid.Parse("31585b9b-7549-4d77-828f-670d617c5fdd").ToByteArray()).Replace("-", "")}','CardDav')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

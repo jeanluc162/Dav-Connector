@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dav_Connector.Model
+namespace Dav_Connector.Library.Model
 {
-    abstract class EntityBase:BindableBase
+    public abstract class EntityBase:BindableBase
     {
         [Key]
         public Guid Id { get; set; }

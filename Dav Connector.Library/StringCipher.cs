@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dav_Connector
+namespace Dav_Connector.Library
 {
     // Derived from https://stackoverflow.com/a/10177020/17611850
     class StringCipher

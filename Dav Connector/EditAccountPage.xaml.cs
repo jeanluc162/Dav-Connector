@@ -21,14 +21,16 @@ namespace Dav_Connector
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet oder zu der innerhalb eines Rahmens navigiert werden kann.
     /// </summary>
-    public sealed partial class AddCredentialPage : Page
+    public sealed partial class EditAccountPage : Page
     {
-        public AddCredentialPage()
+        public EditAccountPage()
         {
             this.InitializeComponent();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+            (DataContext as EditAccountPageViewModel).AccountEditCompleted += EditAccountPage_AccountEditCompleted;
             if (e.Parameter is Guid)
             {
                 ((EditAccountPageViewModel)DataContext).Load((Guid)e.Parameter);
@@ -36,8 +38,18 @@ namespace Dav_Connector
             else
             {
                 ((EditAccountPageViewModel)DataContext).Load(null);
-            }
-            base.OnNavigatedTo(e);
+            }           
+        }
+
+        private void EditAccountPage_AccountEditCompleted(object sender, EventArgs e)
+        {
+            Frame.GoBack();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            (DataContext as EditAccountPageViewModel).AccountEditCompleted -= EditAccountPage_AccountEditCompleted;
+            base.OnNavigatingFrom(e);
         }
     }
 }

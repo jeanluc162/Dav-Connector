@@ -5,9 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
-namespace Dav_Connector
+namespace Dav_Connector.Library
 {
     // https://github.com/microsoft/Windows-appsample-networkhelper/blob/master/DemoApps/QuizGame/Common/BindableBase.cs
     public abstract class BindableBase : INotifyPropertyChanged

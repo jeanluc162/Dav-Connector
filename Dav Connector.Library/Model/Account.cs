@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 
-namespace Dav_Connector.Model
+namespace Dav_Connector.Library.Model
 {
-    class Account:EntityBase
+    public class Account:EntityBase
     {
         String _name;
         public String Name
@@ -26,10 +26,10 @@ namespace Dav_Connector.Model
         [NotMapped]
         public String Password
         {
-            get => StringCipher.Decrypt(EncryptedPassword, GetEncryptionPassword());
+            get => StringCipher.Decrypt(EncryptedPassword, DavConnectorDbContext.GetEncryptionPassword?.Invoke() ?? "");
             set
             {
-                EncryptedPassword = StringCipher.Encrypt(value, GetEncryptionPassword());
+                EncryptedPassword = StringCipher.Encrypt(value, DavConnectorDbContext.GetEncryptionPassword?.Invoke() ?? "");
                 OnPropertyChanged();
             }
         }
@@ -45,12 +45,16 @@ namespace Dav_Connector.Model
             get => _url;
             set => SetProperty(ref _url, value);
         }
+        [ForeignKey(nameof(AccountType))]
+        public Guid AccountTypeId { get; set; }
         AccountType _accountType;
         public AccountType AccountType
         {
             get => _accountType;
             set => SetProperty(ref _accountType, value);
         }
+        [ForeignKey(nameof(SyncType))]
+        public Guid SyncTypeId { get; set; }
         SyncType _syncType;
         public SyncType SyncType
         {
@@ -67,23 +71,6 @@ namespace Dav_Connector.Model
             Url = "";
             AccountType = null;
             SyncType = null;
-        }
-
-        private String GetEncryptionPassword()
-        {
-            const String VaultIdentifier = "DavConnector";
-            var vault = new PasswordVault();
-            PasswordCredential credential;
-            try
-            {
-                credential = vault.Retrieve(VaultIdentifier, VaultIdentifier);
-            }
-            catch
-            {
-                credential = new PasswordCredential(VaultIdentifier, VaultIdentifier, Guid.NewGuid().ToString());
-                vault.Add(credential);
-            }
-            return credential.Password;
         }
     }
 }

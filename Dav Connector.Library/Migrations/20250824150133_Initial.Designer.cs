@@ -3,30 +3,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Dav_Connector.Model;
+using Dav_Connector.Library.Model;
 
-namespace Dav_Connector.Migrations
+namespace DavConnector.Library.Migrations
 {
     [DbContext(typeof(DavConnectorDbContext))]
-    partial class DavConnectorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250824150133_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.6");
 
-            modelBuilder.Entity("Dav_Connector.Model.Account", b =>
+            modelBuilder.Entity("Dav_Connector.Library.Model.Account", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AccountTypeId");
+                    b.Property<Guid>("AccountTypeId");
 
                     b.Property<string>("EncryptedPassword");
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid?>("SyncTypeId");
+                    b.Property<Guid>("SyncTypeId");
 
                     b.Property<string>("Url");
 
@@ -41,7 +42,7 @@ namespace Dav_Connector.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Dav_Connector.Model.AccountType", b =>
+            modelBuilder.Entity("Dav_Connector.Library.Model.AccountType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -53,7 +54,7 @@ namespace Dav_Connector.Migrations
                     b.ToTable("AccountTypes");
                 });
 
-            modelBuilder.Entity("Dav_Connector.Model.SyncType", b =>
+            modelBuilder.Entity("Dav_Connector.Library.Model.SyncType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -65,15 +66,17 @@ namespace Dav_Connector.Migrations
                     b.ToTable("SyncTypes");
                 });
 
-            modelBuilder.Entity("Dav_Connector.Model.Account", b =>
+            modelBuilder.Entity("Dav_Connector.Library.Model.Account", b =>
                 {
-                    b.HasOne("Dav_Connector.Model.AccountType", "AccountType")
+                    b.HasOne("Dav_Connector.Library.Model.AccountType", "AccountType")
                         .WithMany()
-                        .HasForeignKey("AccountTypeId");
+                        .HasForeignKey("AccountTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Dav_Connector.Model.SyncType", "SyncType")
+                    b.HasOne("Dav_Connector.Library.Model.SyncType", "SyncType")
                         .WithMany()
-                        .HasForeignKey("SyncTypeId");
+                        .HasForeignKey("SyncTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

@@ -22,7 +22,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Button Name="AddCredentialButton"  Click="AddCredentialButton_Click" Grid.Column="1" Grid.Row="0">
+        <Button Name="AddCredentialButton" Command="{Binding EditAccountCommand}" Grid.Column="1" Grid.Row="0">
             + Add Account
         </Button>
 
@@ -36,7 +36,7 @@
                             <TextBlock Text="{Binding UserName}" FontStyle="Italic" FontWeight="Bold" FontSize="14"></TextBlock>
                         </StackPanel>
                         <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.EditAccountCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Edit</Button>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Stretch">Delete</Button>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.DeleteAccountCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Delete</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

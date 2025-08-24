@@ -1,5 +1,6 @@
 ﻿using AsyncAwaitBestPractices.MVVM;
-using Dav_Connector.Model;
+using Dav_Connector.Library;
+using Dav_Connector.Library.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Dav_Connector.ViewModel
 {
     class EditAccountPageViewModel : BindableBase
     {
+        public event EventHandler AccountEditCompleted;
         Account _account = null;
         public Account Account
         {
@@ -55,6 +57,9 @@ namespace Dav_Connector.ViewModel
         {
             using (var dbContext = new DavConnectorDbContext())
             {
+                await dbContext.Accounts.Where(acc => acc.Id == Account.Id).Include(acc => acc.SyncType).Include(acc => acc.AccountType).LoadAsync();
+                await dbContext.AccountTypes.LoadAsync();
+                await dbContext.SyncTypes.LoadAsync();
                 if (await dbContext.Accounts.AnyAsync(acc => acc.Id == Account.Id))
                     dbContext.Accounts.Update(Account);
                 else
@@ -69,6 +74,7 @@ namespace Dav_Connector.ViewModel
                     await dialog.ShowAsync();
                 }
             }
+            AccountEditCompleted?.Invoke(this, EventArgs.Empty);
         }
         public EditAccountPageViewModel()
         {

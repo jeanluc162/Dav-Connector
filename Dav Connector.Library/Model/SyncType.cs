@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dav_Connector.Model
+namespace Dav_Connector.Library.Model
 {
-    class SyncType:EntityBase
+    public class SyncType:EntityBase
     {
         public String Name { get; set; }
     }

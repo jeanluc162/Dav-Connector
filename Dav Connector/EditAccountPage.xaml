@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Dav_Connector.AddCredentialPage"
+    x:Class="Dav_Connector.EditAccountPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Dav_Connector"
@@ -21,9 +21,9 @@
         <TextBlock>Password</TextBlock>
         <PasswordBox Password="{Binding Account.Password, Mode=TwoWay}"></PasswordBox>
         <TextBlock>Account Type</TextBlock>
-        <ComboBox SelectedItem="{Binding Account.AccountType, Mode=TwoWay}" ItemsSource="{Binding AccountTypes}" DisplayMemberPath="Name" SelectedIndex="0"></ComboBox>
+        <ComboBox SelectedItem="{Binding Account.AccountType, Mode=TwoWay}" ItemsSource="{Binding AccountTypes}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Stretch"></ComboBox>
         <TextBlock>Sync Type</TextBlock>
-        <ComboBox SelectedItem="{Binding Account.SyncType, Mode=TwoWay}" ItemsSource="{Binding SyncTypes}" DisplayMemberPath="Name" SelectedIndex="2"></ComboBox>
+        <ComboBox SelectedItem="{Binding Account.SyncType, Mode=TwoWay}" ItemsSource="{Binding SyncTypes}" DisplayMemberPath="Name" SelectedIndex="2" HorizontalAlignment="Stretch"></ComboBox>
         <Button HorizontalAlignment="Stretch" Name="SaveButton" Command="{Binding SaveCommand}">Save</Button>
     </StackPanel>
 </Page>
