@@ -35,10 +35,8 @@ namespace Dav_Connector
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            const String DbName = "DavConnectorDb.sqlite";
-            ApplicationData.Current.LocalFolder.CreateFileAsync(DbName, CreationCollisionOption.OpenIfExists).AsTask().GetAwaiter().GetResult();
-            DavConnectorDbContext.DbPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, DbName);
-            DavConnectorDbContext.GetEncryptionPassword = EncryptionPasswordHelper.GetEncryptionPassword;
+            DavConnectorDbContext.DbPath = BackgroundTasks.DbFileHelper.EnsureAndGetDbPath();
+            DavConnectorDbContext.GetEncryptionPassword = BackgroundTasks.EncryptionPasswordHelper.GetEncryptionPassword;
 
             using (var dbContext = new DavConnectorDbContext())
             {

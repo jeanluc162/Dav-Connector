@@ -38,7 +38,7 @@ namespace Dav_Connector
             else
             {
                 ((EditAccountPageViewModel)DataContext).Load(null);
-            }           
+            }
         }
 
         private void EditAccountPage_AccountEditCompleted(object sender, EventArgs e)

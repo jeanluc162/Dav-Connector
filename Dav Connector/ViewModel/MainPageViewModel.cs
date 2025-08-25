@@ -1,4 +1,5 @@
 ﻿using AsyncAwaitBestPractices.MVVM;
+using BackgroundTasks;
 using Dav_Connector.Library;
 using Dav_Connector.Library.Model;
 using Microsoft.EntityFrameworkCore;
@@ -47,28 +48,7 @@ namespace Dav_Connector.ViewModel
         }
         public async Task StartSyncAsync(Guid parameter)
         {
-            Account account;
-            using (var dbContext = new DavConnectorDbContext())
-            {
-                account = await dbContext.Accounts.SingleAsync(acc => acc.Id == parameter);
-            }
-
-            var cards = await Dav_Connector.Library.DavSyncHelper.GetVCards(
-                account.Url,
-                account.UserName,
-                account.Password
-            );
-            var ddd = await (await ContactManager.RequestStoreAsync()).CreateContactListAsync("dddd");
-
-            foreach (var card in cards)
-            {
-                using (var stream = new InMemoryRandomAccessStream())
-                {
-                    await stream.WriteAsync(card.AsBuffer());
-                    var contact = await ContactManager.ConvertVCardToContactAsync(RandomAccessStreamReference.CreateFromStream(stream));
-                    await ddd.SaveContactAsync(contact);
-                }
-            }
+            await AccountSync.SyncAccountAsync(parameter);
         }
         public MainPageViewModel()
         {

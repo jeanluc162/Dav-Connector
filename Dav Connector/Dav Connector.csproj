@@ -122,7 +122,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EncryptionPasswordHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -171,6 +170,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BackgroundTasks\BackgroundTasks.csproj">
+      <Project>{0d5c4fc7-8be0-4bcd-88ef-357758ec1fbe}</Project>
+      <Name>BackgroundTasks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dav Connector.Library\Dav Connector.Library.csproj">
       <Project>{ec648b09-c100-4512-b6bf-b869f814f7c7}</Project>
       <Name>Dav Connector.Library</Name>

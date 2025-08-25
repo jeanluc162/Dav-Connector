@@ -29,16 +29,22 @@
         <ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding Accounts}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Grid.Column="0">
                             <TextBlock Text="{Binding Name}" FontStyle="Oblique" FontWeight="ExtraBold" FontSize="18"></TextBlock>
                             <TextBlock Text="{Binding Url}" FontStyle="Italic" FontWeight="Bold" FontSize="14"></TextBlock>
                             <TextBlock Text="{Binding UserName}" FontStyle="Italic" FontWeight="Bold" FontSize="14"></TextBlock>
                         </StackPanel>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.StartSyncCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Sync Now</Button>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.EditAccountCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Edit</Button>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.DeleteAccountCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Delete</Button>
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.StartSyncCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Sync Now</Button>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.EditAccountCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Edit</Button>
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Command="{Binding DataContext.DeleteAccountCommand, ElementName=PageElement}" CommandParameter="{Binding Id}">Delete</Button>
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

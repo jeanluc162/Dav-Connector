@@ -3,13 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Dav_Connector"
-    xmlns:vm="using:Dav_Connector.ViewModel"
+    xmlns:VM="using:Dav_Connector.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Name="PageElement">
     <Page.DataContext>
-        <vm:EditAccountPageViewModel />
+        <VM:EditAccountPageViewModel />
     </Page.DataContext>
     <StackPanel Orientation="Vertical" Padding="5">
         <TextBlock>Name</TextBlock>
@@ -21,9 +22,9 @@
         <TextBlock>Password</TextBlock>
         <PasswordBox Password="{Binding Account.Password, Mode=TwoWay}"></PasswordBox>
         <TextBlock>Account Type</TextBlock>
-        <ComboBox SelectedItem="{Binding Account.AccountType, Mode=TwoWay}" ItemsSource="{Binding AccountTypes}" DisplayMemberPath="Name" SelectedIndex="0" HorizontalAlignment="Stretch"></ComboBox>
+        <ComboBox SelectedItem="{Binding Account.AccountType, Mode=TwoWay}" ItemsSource="{Binding AccountTypes}" DisplayMemberPath="Name" HorizontalAlignment="Stretch"></ComboBox>
         <TextBlock>Sync Type</TextBlock>
-        <ComboBox SelectedItem="{Binding Account.SyncType, Mode=TwoWay}" ItemsSource="{Binding SyncTypes}" DisplayMemberPath="Name" SelectedIndex="2" HorizontalAlignment="Stretch"></ComboBox>
+        <ComboBox SelectedItem="{Binding Account.SyncType, Mode=TwoWay}" ItemsSource="{Binding SyncTypes}" DisplayMemberPath="Name" HorizontalAlignment="Stretch"></ComboBox>
         <Button HorizontalAlignment="Stretch" Name="SaveButton" Command="{Binding SaveCommand}">Save</Button>
     </StackPanel>
 </Page>

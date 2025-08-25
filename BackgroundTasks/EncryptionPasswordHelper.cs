@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Credentials;
 
-namespace Dav_Connector
+namespace BackgroundTasks
 {
-    static class EncryptionPasswordHelper
+    public static class EncryptionPasswordHelper
     {
         public static String GetEncryptionPassword()
         {
